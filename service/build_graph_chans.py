@@ -2,26 +2,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Загрузка данных из первого файла
-file1 = 'service/results/jarvis_test.txt'  
+file1 = 'chans_test/linear_test.txt'  
 data1 = np.loadtxt(file1, delimiter=' ', dtype=float)
 
 # Загрузка данных из второго файла
-file2 = 'service/results/graham_test.txt' 
+file2 = 'chans_test/binary_test.txt' 
 data2 = np.loadtxt(file2, delimiter=' ', dtype=float)
-
-# Загрузка данных из первого файла
-file3 = 'service/results/quick_test.txt'  
-data3 = np.loadtxt(file3, delimiter=' ', dtype=float)
-
-# Загрузка данных из первого файла
-file4 = 'service/results/chans_test.txt'  
-data4 = np.loadtxt(file4, delimiter=' ', dtype=float)
 
 # Извлечение значений X и Y из данных
 x1, y1 = data1[:, 0], data1[:, 1]
 x2, y2 = data2[:, 0], data2[:, 1]
-x3, y3 = data3[:, 0], data3[:, 1]
-x4, y4 = data4[:, 0], data4[:, 1]
+x3 = np.linspace(0, x1[-1], 100)
+y3 = x3 * 0.00001
+x4= x3
+y4 = np.log2(x4) * 100 * 0.000005
 
 # переменные чтобы удобно менять цвет было
 main_color = "#f0f0f0" # задний фон
@@ -79,14 +73,14 @@ line_colors = [
 ]
 
 lines = []
-lines.append(ax.plot(x1, y1, color=line_colors[1], linewidth=1, label='Джарвис')[0]) # ставим нужный цвет линии
+lines.append(ax.plot(x1, y1, color=line_colors[1], linewidth=1, label='линейный поиск')[0]) # ставим нужный цвет линии
 ax.fill_between(x1, y1, color=line_colors[1], alpha=alpha_val) # закрашиваем под ноими
-lines.append(ax.plot(x2, y2, color=line_colors[2], linewidth=1, label='Грэхэм')[0])
+lines.append(ax.plot(x2, y2, color=line_colors[2], linewidth=1, label='бинарный поиск')[0])
 ax.fill_between(x2, y2, color=line_colors[2], alpha=alpha_val)
-lines.append(ax.plot(x3, y3, color=line_colors[3], linewidth=1, label='Быстаря оболочка')[0])
-ax.fill_between(x3, y3, color=line_colors[3], alpha=alpha_val)
-lines.append(ax.plot(x4, y4, color=line_colors[4], linewidth=1, label='Чан')[0])
-ax.fill_between(x4, y4, color=line_colors[4], alpha=alpha_val)
+# lines.append(ax.plot(x3, y3, color=line_colors[3], linewidth=1, label='y = x')[0])
+# ax.fill_between(x3, y3, color=line_colors[3], alpha=alpha_val)
+# lines.append(ax.plot(x4, y4, color=line_colors[4], linewidth=1, label='y = log2(x)')[0])
+# ax.fill_between(x4, y4, color=line_colors[4], alpha=alpha_val)
 
 # Добавляем легенду с настройкой стиля
 legend = ax.legend(

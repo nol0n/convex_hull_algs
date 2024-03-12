@@ -42,7 +42,7 @@ def find_tangent(pnt: list, hull: list):
     while not (
                ( 
                 (pnt_greater(pnt, hull[curr % len(hull)], hull[(curr + 1) % len(hull)])) and 
-                (pnt_greater(pnt, hull[curr % len(hull)], hull[(curr - 1)  % len(hull)])) 
+                (pnt_greater(pnt, hull[curr % len(hull)], hull[(curr - 1) % len(hull)])) 
                ) or
                (b - a == 1)
               ):
@@ -82,6 +82,17 @@ def find_tangent(pnt: list, hull: list):
     
     return hull[curr % len(hull)]
 
+def find_tangent_linear(pnt: list, hull: list):
+    if len(hull) == 1:
+        return hull[0]
+    
+    curr = 0 
+    
+    while not (pnt_greater(pnt, hull[curr], hull[(curr + 1) % len(hull)]) and pnt_greater(pnt, hull[curr], hull[curr - 1])):
+        curr += 1
+        
+    return hull[curr]
+
 def chans_alg(pnts: list, hull_size: int):
     hulls_count = (len(pnts) - 1) // hull_size + 1
     sub_hulls = [gs.graham_scan(pnts[i * hull_size : (i + 1) * hull_size]) for i in range(hulls_count)]
@@ -90,7 +101,7 @@ def chans_alg(pnts: list, hull_size: int):
     for v in range(hull_size):
         new_pnt = None
         for h in range(hulls_count):
-            tmp_pnt = find_tangent(ans[-1], sub_hulls[h])
+            tmp_pnt = find_tangent_linear(ans[-1], sub_hulls[h])
             if new_pnt == None:
                 new_pnt = tmp_pnt
             elif pnt_greater(ans[-1], tmp_pnt, new_pnt):

@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
         "./algorithms",
-        "./service"
+        "./service",
+        "./chans_test"
     ]
 }

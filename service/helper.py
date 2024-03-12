@@ -33,7 +33,7 @@ def write_test(file_name, data):
         for test in data:
             file.write(f'{test[0]} {test[1]}\n')
         
-def generate_points(amount: int):
+def generate_points_square(amount: int):
     coords = []
     count = 0
     size = int(math.sqrt(amount)) * 10
@@ -43,5 +43,29 @@ def generate_points(amount: int):
             point = [random.randint(0, size), random.randint(0, size)]
         coords.append(point)
         count += 1    
+    
+    return coords
+
+def generate_points_circle(amount: int, a: int, b: int = None):
+    if b is None:
+        b = a
+
+    coords = []
+    center_x, center_y = a + 5, b + 5
+    count = 0
+    while (count < amount):
+        r = math.sqrt(random.random())
+        theta = random.random() * 2 * math.pi
+        x = center_x + a * r * math.cos(theta)
+        y = center_y + b * r * math.sin(theta)
+        point = [x, y]
+        while point in coords:
+            r = math.sqrt(random.random())
+            theta = random.random() * 2 * math.pi
+            x = center_x + a * r * math.cos(theta)
+            y = center_y + b * r * math.sin(theta)
+            point = [x, y]
+        coords.append(point)
+        count += 1
     
     return coords

@@ -20,14 +20,14 @@ import time as time
 # 1 - проверка алгоритмов
 # 2 - для построения графиков
 # 3 - проверка на заданных данных
-test = 2
+test = 3
 
 if test == 1 or test == 3:
-    output_data_file = "output.txt"
-    test_data = "input.txt"
+    output_data_file = "main_files/output.txt"
+    test_data = "main_files/input.txt"
 
     if test == 1:
-        input_data = hlpr.generate_points(15)
+        input_data = hlpr.generate_points_square(15)
         hlpr.write_test(test_data, input_data)
     if test == 3:
         input_data = hlpr.read_file(test_data)
@@ -66,7 +66,7 @@ if test == 2:
         delta4 = 0
         
         for _ in range(iters):
-            input_data = hlpr.generate_points(number)
+            input_data = hlpr.generate_points_square(number)
             
             start = time.time()
             jm.jarvis_march(input_data)
